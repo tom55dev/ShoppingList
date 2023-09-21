@@ -3,7 +3,7 @@ package graph
 import (
 	"encoding/json"
 	"net/http"
-	"shopping-list-app/shoppinglist" // replace with your project import path
+	"shopping-list-app/shoppinglist"
 
 	"github.com/graphql-go/graphql"
 )
