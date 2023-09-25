@@ -47,6 +47,16 @@ func UpdateShoppingItem(id int, itemName string, description string, countItem i
 	return false
 }
 
+func UpdatePurchasedStatus(id int, purchased bool) bool {
+	for i, item := range ShoppingItems {
+		if item.ID == id {
+			ShoppingItems[i].Purchased = purchased
+			return true
+		}
+	}
+	return false
+}
+
 func DeleteShoppingItem(id int) bool {
 	for i, item := range ShoppingItems {
 		if item.ID == id {
