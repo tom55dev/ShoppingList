@@ -109,6 +109,22 @@ var shoppingItemMutations = graphql.NewObject(
 					return UpdateShoppingItem(id, itemName, description, count, purchased), nil
 				},
 			},
+			"updatePurchasedStatus": &graphql.Field{
+				Type: graphql.Boolean,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.Int),
+					},
+					"purchased": &graphql.ArgumentConfig{
+						Type: graphql.NewNonNull(graphql.Boolean),
+					},
+				},
+				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+					id, _ := p.Args["id"].(int)
+					purchased, _ := p.Args["purchased"].(bool)
+					return UpdatePurchasedStatus(id, purchased), nil
+				},
+			},
 			"deleteShoppingItem": &graphql.Field{
 				Type: graphql.Boolean,
 				Args: graphql.FieldConfigArgument{
