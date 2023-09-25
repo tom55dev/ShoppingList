@@ -1,84 +1,121 @@
+```markdown
 # Shopping List App
 
-The Shopping List App is a simple yet efficient application written in Go that allows users to manage their shopping lists using GraphQL. It provides a clean API to perform CRUD operations on shopping list items.
+A simple GraphQL-based Shopping List App developed using Go.
 
-## Table of Contents
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [API](#api)
-  - [Queries](#queries)
-  - [Mutations](#mutations)
-- [Contributing](#contributing)
-- [License](#license)
+## Overview
+
+This project exposes a GraphQL endpoint allowing users to perform CRUD operations on a shopping list. Each item in the shopping list has an ID, item name, description, count, and a purchased status. The app is designed to be easy to set up and run, and it serves as a foundation for anyone looking to get started with GraphQL in Go.
+
+## Features
+
+- **CRUD Operations**: Perform Create, Read, Update, and Delete operations on shopping items.
+- **Graphql Endpoint**: Interact with the app through a GraphQL endpoint.
+- **Purchased Status Update**: Easily update the purchased status of a shopping item.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
 ### Prerequisites
 
-- Go 1.16 or higher
-- Git
+- [Go](https://golang.org/dl/) (1.16 or higher)
 
-### Installation
+### Running the App
 
 1. Clone the repository:
-```sh
-git clone https://github.com/your_username/shopping-list-app.git
-```
+   ```sh
+   git clone https://github.com/your-username/shopping-list-app.git
+   cd shopping-list-app
+   ```
+   
+2. Run the application:
+   ```sh
+   go run main.go
+   ```
 
-2. Navigate into the project directory:
-```sh
-cd shopping-list-app
-```
-
-3. Install the dependencies:
-```sh
-go get -v -t -d ./...
-```
-
-4. Run the application:
-```sh
-go run main.go
-```
-
-The server will start, and you can send GraphQL requests to `http://localhost:8080/shoppinglist`.
+3. The GraphQL endpoint will be available at `http://localhost:8080/shoppinglist`.
 
 ## Usage
 
-Send GraphQL requests to `http://localhost:8080/shoppinglist` to interact with the shopping list.
-
-## API
+Send GraphQL queries to `http://localhost:8080/shoppinglist` to interact with the application. Here are some example queries and mutations:
 
 ### Queries
 
-- `shoppingItems`: Fetch all shopping items.
-- `shoppingItem(id: Int)`: Fetch a single shopping item by its ID.
+**Fetch All Shopping Items**
+```graphql
+{
+  shoppingItems {
+    id
+    itemName
+    description
+    count
+    purchased
+  }
+}
+```
+
+**Fetch a Single Shopping Item**
+```graphql
+{
+  shoppingItem(id: 1) {
+    id
+    itemName
+    description
+    count
+    purchased
+  }
+}
+```
 
 ### Mutations
 
-- `addShoppingItem(itemName: String, description: String, count: Int)`: Add a new item to the shopping list.
-- `updateShoppingItem(id: Int, itemName: String, description: String, count: Int, purchased: Boolean)`: Update an existing item.
-- `deleteShoppingItem(id: Int)`: Remove an item from the shopping list by its ID.
+**Add a Shopping Item**
+```graphql
+mutation {
+  addShoppingItem(itemName: "Milk", description: "1 Gallon", count: 2) {
+    id
+    itemName
+    description
+    count
+    purchased
+  }
+}
+```
+
+**Update a Shopping Item**
+```graphql
+mutation {
+  updateShoppingItem(id: 1, itemName: "Milk", description: "1 Gallon", count: 2, purchased: true) 
+}
+```
+
+**Update Purchased Status**
+```graphql
+mutation {
+  updatePurchasedStatus(id: 1, purchased: true)
+}
+```
+
+**Delete a Shopping Item**
+```graphql
+mutation {
+  deleteShoppingItem(id: 1)
+}
+```
+
+## Testing
+
+To run the tests for this project, navigate to the project directory and execute the following command:
+
+```sh
+go test ./...
+```
+
+This will run all the test cases written for the application and provide the results.
 
 ## Contributing
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Feel free to fork the project, make changes, and open a pull request. All contributions are welcome!
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+```
 
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## Contact
-
-dan.smiledev@email.com
-
-[https://github.com/HugeSmileDev/shopping-list-app](https://github.com/HugeSmileDev/ShoppingList-Backend)
+Make sure to update the URL in the `git clone` command with the actual URL of your repository. Also, note that this is a generic README template, feel free to modify it according to your project's specific needs and details.
