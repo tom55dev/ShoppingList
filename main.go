@@ -7,7 +7,17 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/shoppinglist", graph.ShoppingListGraphHandler)
+	shoppingListHandler := func(w http.ResponseWriter, r *http.Request) {
+		// Set CORS headers
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+		// Call actual handler function
+		graph.ShoppingListGraphHandler(w, r)
+	}
+
+	http.HandleFunc("/shoppinglist", shoppingListHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
